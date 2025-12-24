@@ -1,0 +1,31 @@
+template:
+  - sensor:
+      - name: "Example Room - Scheduled Temperature"
+        unique_id: example_room_scheduled_temperature
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: >
+          {% set preset = states('input_select.example_room_active_preset') %}
+          {% if preset == 'comfort' %}
+            {{ states('input_number.trv_preset_comfort') }}
+          {% elif preset == 'eco' %}
+            {{ states('input_number.trv_preset_eco') }}
+          {% elif preset == 'away' %}
+            {{ states('input_number.trv_preset_away') }}
+          {% elif preset == 'sleep' %}
+            {{ states('input_number.trv_preset_sleep') }}
+          {% else %}
+            {{ states('input_number.trv_preset_comfort') }}
+          {% endif %}
+
+  - sensor:
+      - name: "Example Room - Target Temperature"
+        unique_id: example_room_target_temperature
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: >
+          {% if is_state('input_boolean.example_room_manual_override', 'on') %}
+            {{ states('input_number.example_room_manual_temperature') }}
+          {% else %}
+            {{ states('sensor.example_room_scheduled_temperature') }}
+          {% endif %}

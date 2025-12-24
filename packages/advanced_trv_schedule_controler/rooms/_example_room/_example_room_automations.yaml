@@ -1,0 +1,65 @@
+automation:
+  - alias: "Example Room - Nightly reset manual override"
+    mode: single
+
+    trigger:
+      - platform: time
+        at: "02:00:00"
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.example_room_follow_schedule
+        state: "on"
+
+      - condition: state
+        entity_id: input_boolean.example_room_manual_override
+        state: "on"
+
+    action:
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.example_room_manual_override
+
+#--------------------------------------------------------------------Apply target temperature to TRVs
+  - alias: "Example Room - Apply target temperature to TRVs"
+    mode: queued
+
+    trigger:
+      - platform: state
+        entity_id: sensor.example_room_target_temperature
+
+    variables:
+      trvs: >
+        {{ states('input_text.example_room_trvs').split(',') | map('trim') | list }}
+      target: "{{ trigger.to_state.state | float }}"
+
+    condition:
+      # Never fight the user while manual override is active
+      - condition: state
+        entity_id: input_boolean.example_room_manual_override
+        state: "off"
+
+    action:
+      # Mark that automation is controlling TRVs
+      - service: input_boolean.turn_on
+        target:
+          entity_id: input_boolean.example_room_set_by_automation
+
+      # Apply temperature only where needed
+      - repeat:
+          for_each: "{{ trvs }}"
+          sequence:
+            - condition: template
+              value_template: >
+                {{ state_attr(repeat.item, 'temperature') | float != target }}
+
+            - service: climate.set_temperature
+              target:
+                entity_id: "{{ repeat.item }}"
+              data:
+                temperature: "{{ target }}"
+
+      # Clear automation flag
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.example_room_set_by_automation
