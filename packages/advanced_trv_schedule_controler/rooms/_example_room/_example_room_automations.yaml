@@ -1,5 +1,6 @@
 automation:
   - alias: "Example Room - Nightly reset manual override"
+    id: "example_room_nightly_reset_manual_override"
     mode: single
 
     trigger:
@@ -20,8 +21,9 @@ automation:
         target:
           entity_id: input_boolean.example_room_manual_override
 
-#--------------------------------------------------------------------Apply target temperature to TRVs
+  #--------------------------------------------------------------------Apply target temperature to TRVs
   - alias: "Example Room - Apply target temperature to TRVs"
+    id: "example_room_apply_target_temperature_to_trvs"
     mode: queued
 
     trigger:

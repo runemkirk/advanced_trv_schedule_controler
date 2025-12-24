@@ -1,5 +1,6 @@
 automation:
   - alias: "Example Room - Comfort schedule → preset"
+    id: "example_room_comfort_schedule_to_preset"
     use_blueprint:
       path: schedule_to_preset.yaml
       input:
@@ -10,6 +11,7 @@ automation:
         manual_override_boolean: input_boolean.example_room_manual_override
 
   - alias: "Example Room - Eco schedule → preset"
+    id: "example_room_eco_schedule_to_preset"
     use_blueprint:
       path: schedule_to_preset.yaml
       input:
@@ -20,6 +22,7 @@ automation:
         manual_override_boolean: input_boolean.example_room_manual_override
 
   - alias: "Example Room - Away schedule → preset"
+    id: "example_room_away_schedule_to_preset"
     use_blueprint:
       path: schedule_to_preset.yaml
       input:
@@ -30,6 +33,7 @@ automation:
         manual_override_boolean: input_boolean.example_room_manual_override
 
   - alias: "Example Room - Sleep schedule → preset"
+    id: "example_room_sleep_schedule_to_preset"
     use_blueprint:
       path: schedule_to_preset.yaml
       input:
