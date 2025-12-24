@@ -2,7 +2,7 @@ automation:
   - alias: "Example Room - Comfort schedule → preset"
     id: "example_room_comfort_schedule_to_preset"
     use_blueprint:
-      path: schedule_to_preset.yaml
+      path: advanced_trv_schedule_controler/schedule_to_preset.yaml
       input:
         schedule_entity: schedule.example_room_schedule_comfort
         preset_selector: input_select.example_room_active_preset
@@ -13,7 +13,7 @@ automation:
   - alias: "Example Room - Eco schedule → preset"
     id: "example_room_eco_schedule_to_preset"
     use_blueprint:
-      path: schedule_to_preset.yaml
+      path: advanced_trv_schedule_controler/schedule_to_preset.yaml
       input:
         schedule_entity: schedule.example_room_schedule_eco
         preset_selector: input_select.example_room_active_preset
@@ -24,7 +24,7 @@ automation:
   - alias: "Example Room - Away schedule → preset"
     id: "example_room_away_schedule_to_preset"
     use_blueprint:
-      path: schedule_to_preset.yaml
+      path: advanced_trv_schedule_controler/schedule_to_preset.yaml
       input:
         schedule_entity: schedule.example_room_schedule_away
         preset_selector: input_select.example_room_active_preset
@@ -35,7 +35,7 @@ automation:
   - alias: "Example Room - Sleep schedule → preset"
     id: "example_room_sleep_schedule_to_preset"
     use_blueprint:
-      path: schedule_to_preset.yaml
+      path: advanced_trv_schedule_controler/schedule_to_preset.yaml
       input:
         schedule_entity: schedule.example_room_schedule_sleep
         preset_selector: input_select.example_room_active_preset
