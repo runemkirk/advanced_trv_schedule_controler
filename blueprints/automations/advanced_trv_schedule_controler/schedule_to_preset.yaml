@@ -1,0 +1,65 @@
+blueprint:
+  name: "ATSC - Schedule → Preset"
+  description: >
+    When a schedule turns ON, set a room preset selector to a preset value.
+    Respects room follow-schedule toggle and manual override boolean.
+    ATSC = Advanced TRV Schedule Controler
+
+  domain: automation
+  input:
+    schedule_entity:
+      name: Schedule entity
+      selector:
+        entity:
+          domain: schedule
+
+    preset_selector:
+      name: Room preset selector
+      selector:
+        entity:
+          domain: input_select
+
+    preset_value:
+      name: Preset value to set
+      selector:
+        select:
+          options:
+            - comfort
+            - eco
+            - away
+            - sleep
+
+    follow_schedule_boolean:
+      name: Follow schedule boolean (room)
+      selector:
+        entity:
+          domain: input_boolean
+
+    manual_override_boolean:
+      name: Manual override boolean (room)
+      selector:
+        entity:
+          domain: input_boolean
+
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: !input schedule_entity
+    to: "on"
+
+condition:
+  - condition: state
+    entity_id: !input follow_schedule_boolean
+    state: "on"
+
+  - condition: state
+    entity_id: !input manual_override_boolean
+    state: "off"
+
+action:
+  - service: input_select.select_option
+    target:
+      entity_id: !input preset_selector
+    data:
+      option: !input preset_value

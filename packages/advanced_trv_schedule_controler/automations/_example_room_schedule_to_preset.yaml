@@ -1,0 +1,40 @@
+automation:
+  - alias: "Example Room - Comfort schedule → preset"
+    use_blueprint:
+      path: schedule_to_preset.yaml
+      input:
+        schedule_entity: schedule.example_room_schedule_comfort
+        preset_selector: input_select.example_room_active_preset
+        preset_value: comfort
+        follow_schedule_boolean: input_boolean.example_room_follow_schedule
+        manual_override_boolean: input_boolean.example_room_manual_override
+
+  - alias: "Example Room - Eco schedule → preset"
+    use_blueprint:
+      path: schedule_to_preset.yaml
+      input:
+        schedule_entity: schedule.example_room_schedule_eco
+        preset_selector: input_select.example_room_active_preset
+        preset_value: eco
+        follow_schedule_boolean: input_boolean.example_room_follow_schedule
+        manual_override_boolean: input_boolean.example_room_manual_override
+
+  - alias: "Example Room - Away schedule → preset"
+    use_blueprint:
+      path: schedule_to_preset.yaml
+      input:
+        schedule_entity: schedule.example_room_schedule_away
+        preset_selector: input_select.example_room_active_preset
+        preset_value: away
+        follow_schedule_boolean: input_boolean.example_room_follow_schedule
+        manual_override_boolean: input_boolean.example_room_manual_override
+
+  - alias: "Example Room - Sleep schedule → preset"
+    use_blueprint:
+      path: schedule_to_preset.yaml
+      input:
+        schedule_entity: schedule.example_room_schedule_sleep
+        preset_selector: input_select.example_room_active_preset
+        preset_value: sleep
+        follow_schedule_boolean: input_boolean.example_room_follow_schedule
+        manual_override_boolean: input_boolean.example_room_manual_override
